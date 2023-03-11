@@ -29,7 +29,7 @@ const CharacterInfo = () => {
 
   return (
     <PageContainer>
-      <BackLink to="main">
+      <BackLink to="/main">
         <AiOutlineArrowLeft />
         Go back
       </BackLink>

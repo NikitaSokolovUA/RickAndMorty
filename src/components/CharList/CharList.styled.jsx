@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const ListContainer = styled.div`
   max-width: 1020px;
+  margin-top: 63px;
   margin-left: auto;
   margin-right: auto;
 `;

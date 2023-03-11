@@ -11,7 +11,7 @@ export const fetchChars = createAsyncThunk(
         signal: controller.signal,
       });
 
-      return data.results;
+      return data;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);
     }
@@ -23,9 +23,25 @@ export const fetchCharsByName = createAsyncThunk(
   async (credential, thunkAPI) => {
     try {
       const { data } = await axios.get(`/character/?name=${credential}`);
+
       if (data) {
         return data.results;
       }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchCharsByPage = createAsyncThunk(
+  'char/fetchCharByPage',
+  async (credential, thunkAPI) => {
+    try {
+      const { data } = await axios.get(`/character/?page=${credential.page}`, {
+        signal: credential.controller.signal,
+      });
+
+      return data.results;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);
     }

@@ -8,7 +8,9 @@ const Search = () => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchCharsByName(value));
+    if (value !== '') {
+      dispatch(fetchCharsByName(value));
+    }
   }, [value, dispatch]);
 
   return (
@@ -21,8 +23,8 @@ const Search = () => {
         pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
         title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
         value={value}
-        required
         onChange={e => setValue(e.target.value)}
+        required
       />
     </Container>
   );
