@@ -7,6 +7,20 @@ export const Card = styled.li`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 2px 4px rgba(0, 0, 0, 0.14);
   border-radius: 4px;
+
+  @media screen and (max-width: 800px) {
+    width: calc((100% - 40px) / 3);
+  }
+
+  @media screen and (max-width: 600px) {
+    width: calc((100% - 20px) / 2);
+  }
+
+  @media screen and (max-width: 480px) {
+    margin-left: auto;
+    margin-right: auto;
+    width: 240px;
+  }
 `;
 
 export const LinkToChar = styled(Link)`

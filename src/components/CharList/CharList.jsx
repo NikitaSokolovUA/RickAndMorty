@@ -1,18 +1,20 @@
 import CharCard from 'components/CharCard';
 import { useSelector } from 'react-redux';
-import { selectCharacters } from 'redux/charSlice/charSelectors';
+import { selectSortCharacter } from 'redux/charSlice/charSelectors';
 import { List, ListContainer } from './CharList.styled';
 
 const CharList = () => {
-  const characters = useSelector(selectCharacters);
+  const characters = useSelector(selectSortCharacter);
 
   return (
     <ListContainer>
-      <List>
-        {characters.map(character => (
-          <CharCard key={character.id} character={character} />
-        ))}
-      </List>
+      {characters && (
+        <List>
+          {characters.map(character => (
+            <CharCard key={character.id} character={character} />
+          ))}
+        </List>
+      )}
     </ListContainer>
   );
 };
