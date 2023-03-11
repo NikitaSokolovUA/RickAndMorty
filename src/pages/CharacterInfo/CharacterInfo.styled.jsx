@@ -14,6 +14,12 @@ export const BackLink = styled(Link)`
   text-decoration: none;
 
   color: #000000;
+  transition: color 250ms linear;
+
+  :hover,
+  :focus {
+    color: #ff751d;
+  }
 `;
 
 export const Container = styled.div`
@@ -35,7 +41,7 @@ export const CharLogo = styled.img`
 
 export const CharName = styled.h2`
   margin-top: 18px;
-  font-family: 'Roboto';
+  font-style: 'Roboto';
 
   font-weight: 400;
   font-size: 48px;
@@ -50,7 +56,7 @@ export const Subtitle = styled.p`
   margin-top: 48px;
   margin-bottom: 57px;
 
-  font-family: 'Roboto';
+  font-style: 'Roboto';
   font-weight: 500;
   font-size: 20px;
   line-height: calc(24 / 20);
@@ -92,12 +98,9 @@ export const InfoTitle = styled.p`
 
 export const Info = styled.span`
   display: block;
-  font-family: 'Roboto';
-  font-style: normal;
   font-weight: 400;
   font-size: 14px;
-  line-height: 20px;
-  /* identical to box height, or 143% */
+  line-height: calc(20 / 14);
 
   letter-spacing: 0.25px;
 

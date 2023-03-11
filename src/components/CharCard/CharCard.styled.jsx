@@ -7,6 +7,14 @@ export const Card = styled.li`
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 2px 4px rgba(0, 0, 0, 0.14);
   border-radius: 4px;
+  overflow: hidden;
+
+  transition: box-shadow 250ms linear;
+
+  :hover,
+  :focus {
+    box-shadow: 0px 1px 5px #ff751d, 0px 3px 4px #ff751d, 0px 2px 4px #ff751d;
+  }
 
   @media screen and (max-width: 800px) {
     width: calc((100% - 40px) / 3);
@@ -39,7 +47,7 @@ export const Credentials = styled.div`
 export const Name = styled.p`
   margin: 0;
 
-  font-family: 'Roboto';
+  font-style: 'Roboto';
   font-weight: 500;
   font-size: 20px;
   line-height: 30px;
@@ -49,7 +57,7 @@ export const Name = styled.p`
 
 export const Species = styled.p`
   margin: 0;
-  font-family: 'Roboto';
+  font-style: 'Roboto';
   font-weight: 400;
   font-size: 14px;
   line-height: 21px;
