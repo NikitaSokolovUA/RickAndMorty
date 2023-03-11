@@ -25,7 +25,7 @@ export const fetchCharsByName = createAsyncThunk(
       const { data } = await axios.get(`/character/?name=${credential}`);
 
       if (data) {
-        return data.results;
+        return data;
       }
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);

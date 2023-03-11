@@ -27,9 +27,11 @@ const charSlice = createSlice({
       state.isLoading = true;
     },
     [fetchChars.fulfilled](state, action) {
-      state.charList = action.payload.results;
-      state.info.pages = action.payload.info.pages;
-      state.isLoading = false;
+      if (action.payload) {
+        state.charList = action.payload.results;
+        state.info.pages = action.payload.info.pages;
+        state.isLoading = false;
+      }
     },
 
     [fetchChars.rejected](state) {
@@ -39,8 +41,11 @@ const charSlice = createSlice({
       state.isLoading = true;
     },
     [fetchCharsByName.fulfilled](state, action) {
-      state.charList = action.payload;
-      state.isLoading = false;
+      if (action.payload) {
+        state.charList = action.payload.results;
+        state.info.pages = action.payload.info.pages;
+        state.isLoading = false;
+      }
     },
 
     [fetchCharsByName.rejected](state) {
