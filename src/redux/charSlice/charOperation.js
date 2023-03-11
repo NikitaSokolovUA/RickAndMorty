@@ -17,3 +17,17 @@ export const fetchChars = createAsyncThunk(
     }
   }
 );
+
+export const fetchCharsByName = createAsyncThunk(
+  'char/fetchCharByName',
+  async (credential, thunkAPI) => {
+    try {
+      const { data } = await axios.get(`/character/?name=${credential}`);
+      if (data) {
+        return data.results;
+      }
+    } catch (e) {
+      thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);

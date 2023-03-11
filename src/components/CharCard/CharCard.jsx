@@ -8,12 +8,10 @@ import {
 } from './CharCard.styled';
 
 const CharCard = ({ character }) => {
-  console.log(character);
-
   return (
     <Card>
-      <LinkToChar to="/character">
-        <Image src={character.image} alt="" />
+      <LinkToChar to={`/character/${character.id}`}>
+        <Image src={character.image} alt={`image ${character.name}`} />
         <Credentials>
           <Name>{character.name}</Name>
           <Species>{character.species}</Species>

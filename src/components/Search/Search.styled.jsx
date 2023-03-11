@@ -1,9 +1,10 @@
 import styled from 'styled-components';
 import { AiOutlineSearch } from 'react-icons/ai';
 
-export const Container = styled.div`
+export const Container = styled.label`
   position: relative;
-  width: 1020px;
+  display: block;
+  max-width: 1024px;
   margin-top: 16px;
   margin-left: auto;
   margin-right: auto;

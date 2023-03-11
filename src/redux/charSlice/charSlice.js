@@ -1,4 +1,4 @@
-import { fetchChars } from './charOperation';
+import { fetchChars, fetchCharsByName } from './charOperation';
 
 const { createSlice } = require('@reduxjs/toolkit');
 
@@ -6,6 +6,7 @@ const charSlice = createSlice({
   name: 'char',
   initialState: {
     charList: [],
+    felteredCharList: [],
     isLoading: false,
   },
   extraReducers: {
@@ -18,6 +19,17 @@ const charSlice = createSlice({
     },
 
     [fetchChars.rejected](state) {
+      state.isLoading = false;
+    },
+    [fetchCharsByName.pending](state) {
+      state.isLoading = true;
+    },
+    [fetchCharsByName.fulfilled](state, action) {
+      state.charList = action.payload;
+      state.isLoading = false;
+    },
+
+    [fetchCharsByName.rejected](state) {
       state.isLoading = false;
     },
   },
