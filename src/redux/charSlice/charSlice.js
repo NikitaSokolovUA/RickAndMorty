@@ -13,13 +13,16 @@ const charSlice = createSlice({
     info: {
       pages: 0,
     },
+    searchValue: '',
     currentPage: null,
-    felteredCharList: [],
     isLoading: false,
   },
   reducers: {
     changePage(state, action) {
       state.currentPage = action.payload;
+    },
+    changeSearchValue(state, action) {
+      state.searchValue = action.payload;
     },
   },
   extraReducers: {
@@ -44,6 +47,7 @@ const charSlice = createSlice({
       if (action.payload) {
         state.charList = action.payload.results;
         state.info.pages = action.payload.info.pages;
+        state.info.currentPage = null;
         state.isLoading = false;
       }
     },
@@ -65,5 +69,5 @@ const charSlice = createSlice({
   },
 });
 
-export const { changePage } = charSlice.actions;
+export const { changePage, changeSearchValue } = charSlice.actions;
 export const charReducer = charSlice.reducer;
