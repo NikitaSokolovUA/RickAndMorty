@@ -18,7 +18,9 @@ const Pagination = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    dispatch(fetchCharsByPage({ page, controller }));
+    if (page) {
+      dispatch(fetchCharsByPage({ page, controller }));
+    }
 
     return () => controller.abort();
   }, [page, dispatch]);
@@ -31,7 +33,7 @@ const Pagination = () => {
         nextLabel={<AiOutlineArrowRight size={16} />}
         onPageChange={page => dispatch(changePage(page.selected))}
         pageRangeDisplayed={3}
-        pageCount={pageCount}
+        pageCount={pageCount ? pageCount : 1}
         previousLabel={<AiOutlineArrowLeft size={16} />}
         renderOnZeroPageCount={null}
       />
