@@ -20,7 +20,8 @@ const GoogleAuth = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    if (accessToken) {
+    if (accessToken !== '') {
+      console.log('add fetch: ', accessToken);
       dispatch(fetchGoogleAuth());
     }
 
