@@ -4,9 +4,9 @@ const { createSlice } = require('@reduxjs/toolkit');
 const authSlice = createSlice({
   name: 'auth',
   initialState: {
-    name: 'name',
+    name: '',
     email: '',
-    access_token: 'aaa',
+    access_token: '',
     isLoggedIn: false,
     isLoading: false,
   },

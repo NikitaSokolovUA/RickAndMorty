@@ -5,10 +5,12 @@ import { useDispatch } from 'react-redux';
 import { authLogin, authLogout } from 'redux/authSlice/authSlice';
 import { fetchGoogleAuth } from 'redux/authSlice/authOperations';
 import { useAuth } from 'hooks/useAuth';
+import { Header, Btn, Greetings } from './GoogleAuth.styled';
+import { FaGoogle } from 'react-icons/fa';
 
 const GoogleAuth = () => {
   const dispatch = useDispatch();
-  const { accessToken, isLoggedIn, email, name } = useAuth();
+  const { accessToken, isLoggedIn, name } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: codeResponse => {
@@ -19,8 +21,6 @@ const GoogleAuth = () => {
 
   useEffect(() => {
     const controller = new AbortController();
-
-    console.log(accessToken);
 
     if (accessToken !== '') {
       dispatch(fetchGoogleAuth({ controller, accessToken }));
@@ -36,22 +36,19 @@ const GoogleAuth = () => {
 
   return (
     <>
-      <div>
-        <h1>google</h1>
+      <Header>
         {isLoggedIn ? (
-          <div>
-            {/* <img src={profile.picture} alt="user image" /> */}
-            <h3>User Logged in</h3>
-            <p>Name: {name}</p>
-            <p>Email Address: {email}</p>
-            <br />
-            <br />
-            <button onClick={logOut}>Log out</button>
-          </div>
+          <>
+            <Greetings>Hi: {name}</Greetings>
+
+            <Btn onClick={logOut}>Log out</Btn>
+          </>
         ) : (
-          <button onClick={() => login()}>Sign in with Google 🚀 </button>
+          <Btn onClick={() => login()}>
+            Sign in with <FaGoogle size={20} />
+          </Btn>
         )}
-      </div>
+      </Header>
       <Outlet />
     </>
   );
