@@ -8,7 +8,7 @@ import { useAuth } from 'hooks/useAuth';
 
 const GoogleAuth = () => {
   const dispatch = useDispatch();
-  const { accessToken, isLoggedIn, email, name } = useAuth;
+  const { accessToken, isLoggedIn, email, name } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: codeResponse => {
