@@ -11,10 +11,10 @@ import {
   selectCurrentPage,
   selectSearchValue,
 } from 'redux/charSlice/charSelectors';
-import { GoogleLogin } from '@react-oauth/google';
 
 const Main = lazy(() => import('../pages/Main'));
 const CharcterInfo = lazy(() => import('../pages/CharacterInfo'));
+const GoogleAuth = lazy(() => import('../components/GoogleAuth'));
 
 export const App = () => {
   const page = useSelector(selectCurrentPage);
@@ -43,27 +43,15 @@ export const App = () => {
     return () => controller.abort();
   }, [dispatch, page, searchValue]);
 
-  const responseMessage = response => {
-    console.log(response);
-  };
-
-  const errorMessage = error => {
-    console.log(error);
-  };
-
   return (
     <div>
-      <div>
-        <h2>React Google Login</h2>
-        <br />
-        <br />
-        <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
-      </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
-          <Route path="/" element={<Main />} />
-          <Route path="/character/:charId" element={<CharcterInfo />} />
-          <Route path="*" element={<Main />} />
+          <Route path="/" element={<GoogleAuth />}>
+            <Route path="main" element={<Main />} />
+            <Route path="character/:charId" element={<CharcterInfo />} />
+            <Route path="*" element={<Main />} />
+          </Route>
         </Routes>
       </Suspense>
     </div>
