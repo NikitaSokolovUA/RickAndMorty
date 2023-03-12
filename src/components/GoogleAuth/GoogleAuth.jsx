@@ -8,7 +8,7 @@ import { useAuth } from 'hooks/useAuth';
 
 const GoogleAuth = () => {
   const dispatch = useDispatch();
-  const { accessToken, isLoggedIn, email, name } = useAuth;
+  const { accessToken, isLoggedIn, email, name } = useAuth();
 
   const login = useGoogleLogin({
     onSuccess: codeResponse => {
@@ -20,9 +20,10 @@ const GoogleAuth = () => {
   useEffect(() => {
     const controller = new AbortController();
 
+    console.log(accessToken);
+
     if (accessToken !== '') {
-      console.log('add fetch: ', accessToken);
-      dispatch(fetchGoogleAuth());
+      dispatch(fetchGoogleAuth({ controller, accessToken }));
     }
 
     return () => controller.abort();
