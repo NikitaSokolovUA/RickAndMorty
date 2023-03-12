@@ -2,24 +2,31 @@ import { Outlet } from 'react-router';
 import React, { useState, useEffect } from 'react';
 import { googleLogout, useGoogleLogin } from '@react-oauth/google';
 import axios from 'axios';
+import { useDispatch, useSelector } from 'react-redux';
+import { authLogin } from 'redux/authSlice/authSlice';
+import { selectAccessToken } from 'redux/authSlice/authSelectors';
 
 const GoogleAuth = () => {
-  const [user, setUser] = useState([]);
+  const dispatch = useDispatch();
+  const accessToken = useSelector(selectAccessToken);
+  //   const [user, setUser] = useState([]);
   const [profile, setProfile] = useState([]);
 
   const login = useGoogleLogin({
-    onSuccess: codeResponse => setUser(codeResponse),
+    onSuccess: codeResponse => {
+      dispatch(authLogin(codeResponse));
+    },
     onError: error => console.log('Login Failed:', error),
   });
 
   useEffect(() => {
-    if (user) {
+    if (accessToken) {
       axios
         .get(
-          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${user.access_token}`,
+          `https://www.googleapis.com/oauth2/v1/userinfo?access_token=${accessToken}`,
           {
             headers: {
-              Authorization: `Bearer ${user.access_token}`,
+              Authorization: `Bearer ${accessToken}`,
               Accept: 'application/json',
             },
           }
@@ -29,7 +36,7 @@ const GoogleAuth = () => {
         })
         .catch(err => console.log(err));
     }
-  }, [user]);
+  }, [accessToken]);
 
   const logOut = () => {
     googleLogout();
