@@ -6,8 +6,6 @@ import {
 import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 
 import { Container, Paginate } from './Pagination.styled';
-import { useEffect } from 'react';
-import { fetchCharsByPage } from 'redux/charSlice/charOperation';
 import { changePage } from 'redux/charSlice/charSlice';
 
 const Pagination = () => {
@@ -15,15 +13,11 @@ const Pagination = () => {
   const pageCount = useSelector(selectCountPages);
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    const controller = new AbortController();
-
-    if (page) {
-      dispatch(fetchCharsByPage({ page, controller }));
+  const handleChange = ({ selected }) => {
+    if (selected) {
+      dispatch(changePage(selected));
     }
-
-    return () => controller.abort();
-  }, [page, dispatch]);
+  };
 
   return (
     <Container>
@@ -31,7 +25,7 @@ const Pagination = () => {
         initialPage={page}
         breakLabel="..."
         nextLabel={<AiOutlineArrowRight size={16} />}
-        onPageChange={page => dispatch(changePage(page.selected))}
+        onPageChange={handleChange}
         pageRangeDisplayed={3}
         pageCount={pageCount ? pageCount : 1}
         previousLabel={<AiOutlineArrowLeft size={16} />}

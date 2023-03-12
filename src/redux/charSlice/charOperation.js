@@ -41,7 +41,27 @@ export const fetchCharsByPage = createAsyncThunk(
         signal: credential.controller.signal,
       });
 
-      return data.results;
+      return data;
+    } catch (e) {
+      thunkAPI.rejectWithValue(e.message);
+    }
+  }
+);
+
+export const fetchCharsByPageAndName = createAsyncThunk(
+  'char/fetchCharByPageAndName',
+  async (credential, thunkAPI) => {
+    try {
+      const { data } = await axios.get(
+        `/character/?page=${credential.page}&name=${credential.searchValue}`,
+        {
+          signal: credential.controller.signal,
+        }
+      );
+
+      console.log(data);
+
+      return data;
     } catch (e) {
       thunkAPI.rejectWithValue(e.message);
     }
