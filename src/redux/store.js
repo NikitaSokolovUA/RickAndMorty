@@ -15,7 +15,7 @@ import {
 const persistConfig = {
   key: 'char',
   storage,
-  whitelist: ['searchValue'],
+  whitelist: ['searchValue', 'currentPage'],
 };
 
 export const store = configureStore({

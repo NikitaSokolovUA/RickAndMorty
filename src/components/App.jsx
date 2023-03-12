@@ -5,11 +5,13 @@ import {
   fetchChars,
   fetchCharsByName,
   fetchCharsByPage,
+  fetchCharsByPageAndName,
 } from 'redux/charSlice/charOperation';
 import {
   selectCurrentPage,
   selectSearchValue,
 } from 'redux/charSlice/charSelectors';
+import { GoogleLogin } from '@react-oauth/google';
 
 const Main = lazy(() => import('../pages/Main'));
 const CharcterInfo = lazy(() => import('../pages/CharacterInfo'));
@@ -22,26 +24,41 @@ export const App = () => {
   useEffect(() => {
     const controller = new AbortController();
 
-    (() => {
-      if (searchValue !== '') {
-        dispatch(fetchCharsByName(searchValue));
-        return;
-      }
+    if (!page && searchValue === '') {
+      dispatch(fetchChars(controller));
+    }
 
-      if (!page && searchValue === '') {
-        dispatch(fetchChars(controller));
-        return;
-      }
-      if (searchValue === '') {
-        dispatch(fetchCharsByPage({ controller, page }));
-      }
-    })();
+    if (searchValue !== '' && !page) {
+      dispatch(fetchCharsByName(searchValue));
+    }
+
+    if (searchValue === '' && page) {
+      dispatch(fetchCharsByPage({ controller, page }));
+    }
+
+    if (searchValue !== '' && page) {
+      dispatch(fetchCharsByPageAndName({ searchValue, page, controller }));
+    }
 
     return () => controller.abort();
   }, [dispatch, page, searchValue]);
 
+  const responseMessage = response => {
+    console.log(response);
+  };
+
+  const errorMessage = error => {
+    console.log(error);
+  };
+
   return (
     <div>
+      <div>
+        <h2>React Google Login</h2>
+        <br />
+        <br />
+        <GoogleLogin onSuccess={responseMessage} onError={errorMessage} />
+      </div>
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<Main />} />
