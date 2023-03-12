@@ -12,6 +12,7 @@ const GoogleAuth = () => {
   const dispatch = useDispatch();
   const { accessToken, isLoggedIn, name } = useAuth();
 
+  //google login
   const login = useGoogleLogin({
     onSuccess: codeResponse => {
       dispatch(authLogin(codeResponse));
@@ -19,6 +20,7 @@ const GoogleAuth = () => {
     onError: error => console.log('Login Failed:', error),
   });
 
+  //get google Info by access_token
   useEffect(() => {
     const controller = new AbortController();
 
@@ -29,6 +31,7 @@ const GoogleAuth = () => {
     return () => controller.abort();
   }, [accessToken, dispatch]);
 
+  //google logout
   const logOut = () => {
     googleLogout();
     dispatch(authLogout());
@@ -40,7 +43,6 @@ const GoogleAuth = () => {
         {isLoggedIn ? (
           <>
             <Greetings>Hi: {name}</Greetings>
-
             <Btn onClick={logOut}>Log out</Btn>
           </>
         ) : (
