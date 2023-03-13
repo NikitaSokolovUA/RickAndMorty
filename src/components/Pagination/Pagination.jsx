@@ -7,7 +7,6 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import { Container, Paginate } from './Pagination.styled';
 import { changePage } from 'redux/charSlice/charSlice';
-import { useEffect } from 'react';
 
 const Pagination = ({ listRef }) => {
   const page = useSelector(selectCurrentPage);
