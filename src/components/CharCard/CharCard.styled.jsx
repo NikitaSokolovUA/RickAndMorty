@@ -25,8 +25,9 @@ export const Image = styled.img`
   width: 100%;
   height: 168px;
 `;
+
 export const Credentials = styled.div`
-  width: 100%;
+  width: 208px;
   padding: 16px;
 `;
 

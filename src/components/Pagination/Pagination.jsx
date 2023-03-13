@@ -8,7 +8,7 @@ import { useMediaQuery } from 'react-responsive';
 import { Container, Paginate } from './Pagination.styled';
 import { changePage } from 'redux/charSlice/charSlice';
 
-const Pagination = () => {
+const Pagination = ({ listRef }) => {
   const page = useSelector(selectCurrentPage);
   const pageCount = useSelector(selectCountPages);
   const dispatch = useDispatch();
@@ -17,6 +17,11 @@ const Pagination = () => {
   const handleChange = ({ selected }) => {
     if (selected) {
       dispatch(changePage(selected));
+
+      // scroll to the start of list
+      listRef.current.scrollIntoView({
+        behavior: 'smooth',
+      });
     }
   };
 
