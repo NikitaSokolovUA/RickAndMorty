@@ -7,6 +7,7 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from 'react-icons/ai';
 import { useMediaQuery } from 'react-responsive';
 import { Container, Paginate } from './Pagination.styled';
 import { changePage } from 'redux/charSlice/charSlice';
+import { useEffect } from 'react';
 
 const Pagination = ({ listRef }) => {
   const page = useSelector(selectCurrentPage);
@@ -17,11 +18,6 @@ const Pagination = ({ listRef }) => {
   const handleChange = ({ selected }) => {
     if (selected) {
       dispatch(changePage(selected));
-
-      // scroll to the start of list
-      listRef.current.scrollIntoView({
-        behavior: 'smooth',
-      });
     }
   };
 
@@ -32,6 +28,11 @@ const Pagination = ({ listRef }) => {
         breakLabel={'...'}
         nextLabel={<AiOutlineArrowRight size={16} />}
         onPageChange={handleChange}
+        onClick={() =>
+          listRef.current.scrollIntoView({
+            behavior: 'smooth',
+          })
+        }
         pageRangeDisplayed={isMobile ? 1 : 2}
         marginPagesDisplayed={isMobile ? 1 : 2}
         pageCount={pageCount ? pageCount : 1}
