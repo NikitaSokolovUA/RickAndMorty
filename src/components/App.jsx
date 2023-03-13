@@ -48,7 +48,7 @@ export const App = () => {
       <Suspense fallback={<div>Loading...</div>}>
         <Routes>
           <Route path="/" element={<GoogleAuth />}>
-            <Route path="main" element={<Main />} />
+            <Route path="/" element={<Main />} />
             <Route path="character/:charId" element={<CharcterInfo />} />
             <Route path="*" element={<Main />} />
           </Route>
