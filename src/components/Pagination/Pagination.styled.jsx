@@ -26,7 +26,7 @@ export const Paginate = styled(ReactPaginate).attrs({
     justify-content: center;
     list-style-type: none;
     position: relative;
-    width: 700px;
+    width: 500px;
   }
 
   .item {
