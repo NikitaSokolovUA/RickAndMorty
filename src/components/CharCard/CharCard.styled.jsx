@@ -2,7 +2,7 @@ import styled from 'styled-components';
 import { Link } from 'react-router-dom';
 
 export const Card = styled.li`
-  width: calc((100% - 60px) / 4);
+  width: 240px;
 
   box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.2), 0px 3px 4px rgba(0, 0, 0, 0.12),
     0px 2px 4px rgba(0, 0, 0, 0.14);
@@ -14,20 +14,6 @@ export const Card = styled.li`
   :hover,
   :focus {
     box-shadow: 0px 1px 5px #ff751d, 0px 3px 4px #ff751d, 0px 2px 4px #ff751d;
-  }
-
-  @media screen and (max-width: 800px) {
-    width: calc((100% - 40px) / 3);
-  }
-
-  @media screen and (max-width: 600px) {
-    width: calc((100% - 20px) / 2);
-  }
-
-  @media screen and (max-width: 480px) {
-    margin-left: auto;
-    margin-right: auto;
-    width: 240px;
   }
 `;
 
